@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RomanToNumericMicroservice.Helper;
+using System.Net;
 
 namespace RomanToNumericMicroservice.Controllers
 {
@@ -21,7 +22,6 @@ namespace RomanToNumericMicroservice.Controllers
         [Route("api/v1/romantonumeric/{romannumber}")]
         public ActionResult Get(string romannumber)
         {
-
             try
             {
                 var response = _converter.RomanToNumeric(romannumber);
@@ -29,7 +29,7 @@ namespace RomanToNumericMicroservice.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(HttpContext.Response.StatusCode, e.Message);
+                return StatusCode((int)HttpStatusCode.BadRequest, e.Message);
             }
 
         }

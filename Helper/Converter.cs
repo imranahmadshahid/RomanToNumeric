@@ -31,7 +31,20 @@ namespace RomanToNumericMicroservice.Helper
 
         private int computerRomanToNumeric(string romanstring)
         {
-            return 0;
+            int numericNumber = 0;
+
+            for (int i = 0; i < romanstring.Length; i++)
+            {
+                var currentValue = romanstring.Substring(i, 1).ToRomanEnum();
+                var NextValue = i != romanstring.Length - 1 ? romanstring.Substring(i + 1, 1).ToRomanEnum() : 0;
+
+                if (currentValue < NextValue)
+                    numericNumber -= (int)currentValue;
+                else
+                    numericNumber += (int)currentValue;
+            }
+
+            return numericNumber;
         }
     }
 }
